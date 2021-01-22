@@ -4,10 +4,11 @@ Begin VB.Form Form1
    ClientHeight    =   7215
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   16110
+   ClientWidth     =   13935
+   Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   7215
-   ScaleWidth      =   16110
+   ScaleWidth      =   13935
    StartUpPosition =   3  'Windows-Standard
    Begin VB.TextBox TxtData 
       Height          =   6495
@@ -16,15 +17,15 @@ Begin VB.Form Form1
       ScrollBars      =   3  'Beides
       TabIndex        =   4
       Top             =   720
-      Width           =   16095
+      Width           =   13335
    End
    Begin VB.CheckBox cbNewlineOnly 
       Caption         =   "Only NewLine"
       Height          =   195
-      Left            =   3840
+      Left            =   1560
       TabIndex        =   2
       ToolTipText     =   "Every data will be in one column"
-      Top             =   240
+      Top             =   360
       Width           =   1335
    End
    Begin VB.CheckBox cbNumOnly 
@@ -32,7 +33,7 @@ Begin VB.Form Form1
       Height          =   195
       Left            =   1560
       TabIndex        =   1
-      Top             =   240
+      Top             =   80
       Width           =   1935
    End
    Begin VB.CommandButton BtnRead 
@@ -40,16 +41,18 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   120
       TabIndex        =   0
-      Top             =   120
+      Top             =   80
       Width           =   1215
    End
    Begin VB.Label Label1 
-      Caption         =   $"Form1.frx":0000
-      Height          =   495
-      Left            =   5880
+      AutoSize        =   -1  'True
+      Caption         =   $"Form1.frx":1782
+      Height          =   750
+      Left            =   3720
       TabIndex        =   3
-      Top             =   120
+      Top             =   75
       Width           =   10095
+      WordWrap        =   -1  'True
    End
 End
 Attribute VB_Name = "Form1"
@@ -62,7 +65,10 @@ Option Explicit
 Private Sub Form_Resize()
     Dim L As Single, t As Single, W As Single, H As Single
     t = TxtData.Top: W = Me.ScaleWidth: H = Me.ScaleHeight - t
-    If W > 0 And H > 0 Then TxtData.Move L, t, W, H
+    If W > 0 And H > 0 Then
+        TxtData.Move L, t, W, H
+        Label1.Move Label1.Left, Label1.Top, W - Label1.Left
+    End If
 End Sub
 
 Private Sub BtnRead_Click()
@@ -116,8 +122,10 @@ Private Sub BtnRead_Click()
         End If
         lines(i) = line
     Next
-    TxtData.Text = Join(lines, vbCrLf)
-    Clipboard.SetText TxtData.Text
+    t = Join(lines, vbCrLf)
+    TxtData.Text = t
+    Clipboard.Clear
+    Clipboard.SetText t
 End Sub
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     TxtData_KeyDown KeyCode, Shift

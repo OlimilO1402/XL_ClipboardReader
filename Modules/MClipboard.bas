@@ -54,3 +54,16 @@ Private Const GMEM_MOVEABLE As Long = 2
     End Sub
 #End If
 
+Public Sub CBSetText(aText As String)
+    Dim ClipB As Object: Set ClipB = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
+    ClipB.SetText aText
+    ClipB.PutInClipboard
+    Set ClipB = Nothing
+End Sub
+
+Public Function CBGetText() As String
+    Dim ClipB As Object: Set ClipB = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
+    ClipB.GetFromClipboard
+    CBGetText = ClipB.GetText
+    Set ClipB = Nothing
+End Function
