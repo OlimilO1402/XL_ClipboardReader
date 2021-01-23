@@ -169,36 +169,3 @@ Function PadRight(this As String, _
     End If
 End Function
 
-
-'Function ClipBoard_GetText() As String
-'Try: On Error GoTo Catch
-'    Dim docb As New DataObject
-'    docb.GetFromClipboard
-'    ClipBoard_GetText = docb.GetText
-'Catch:
-'End Function
-'
-'Sub ClipBoard_SetText(ByVal aText As String)
-'Try: On Error GoTo Catch
-'    Dim docb As New DataObject
-'    'docb.Clear
-'#If Win64 Then
-'    'MsgBox "x64"
-'    'aText = StrConv(aText, vbWide)
-'    'so ein verfluchter Dreck, warum geht das DataObject jetzt nicht mehr
-'    'docb.SetText aText, 1
-'    'docb.PutInClipboard
-''    Dim objClipBoard As Object
-''    Set objClipBoard = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
-''    Call objClipBoard.SetText(aText)
-''    Call objClipBoard.PutInClipboard
-''    Set objClipBoard = Nothing
-'    StringToClipboard aText
-'#Else
-'    'MsgBox "x86"
-'    docb.SetText aText, 1
-'    docb.PutInClipboard
-'#End If
-'Catch:
-'End Sub
-
