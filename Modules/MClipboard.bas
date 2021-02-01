@@ -55,15 +55,46 @@ Private Const GMEM_MOVEABLE As Long = 2
 #End If
 
 Public Sub CBSetText(aText As String)
-    Dim ClipB As Object: Set ClipB = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
+    Dim ClipB As Object: Set ClipB = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}") 'msforms20 DataObject
     ClipB.SetText aText
     ClipB.PutInClipboard
     Set ClipB = Nothing
 End Sub
 
 Public Function CBGetText() As String
-    Dim ClipB As Object: Set ClipB = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
+    Dim ClipB As Object: Set ClipB = CreateObject("new:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}") 'msforms20 DataObject
     ClipB.GetFromClipboard
     CBGetText = ClipB.GetText
     Set ClipB = Nothing
 End Function
+
+#If VBA Then
+Function ClipBoard_GetText() As String
+Try: On Error GoTo Catch
+    Dim docb As New DataObject
+    docb.GetFromClipboard
+    ClipBoard_GetText = docb.GetText
+Catch:
+End Function
+#End If
+
+#If VBA Then
+Sub ClipBorad_SetText(ByVal aText As String)
+Try: On Error GoTo Catch
+    Dim docb As DataObject
+    Set docb = New DataObject
+    'docb.Clear
+#If Win64 Then
+    'MsgBox "x64"
+    'aText = StrConv(aText, vbWide)
+    docb.SetText aText, 1
+    docb.PutInClipboard
+#Else
+    'MsgBox "x86"
+    docb.SetText aText, 1
+    docb.PutInClipboard
+#End If
+Catch:
+End Sub
+#End If
+

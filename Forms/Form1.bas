@@ -92,3 +92,19 @@ End Sub
 '    Call objClipBoard.SetText("Hallo Welt")
 '    Call objClipBoard.PutInClipboard
 '    Set objClipBoard = Nothing
+
+
+'Replace Recursive Delete Multi WhiteSpace WS
+Public Function DeleteMultiWS(s As String) As String
+    DeleteMultiWS = Trim$(s)
+    If InStr(1, s, "  ") = 0 Then Exit Function
+    DeleteMultiWS = Replace(s, "  ", " ")
+    DeleteMultiWS = DeleteMultiWS(DeleteMultiWS)
+End Function
+Public Function DeleteCRLF(s As String) As String
+    DeleteCRLF = Trim$(s)
+    If InStr(1, s, vbLf) = 0 Then Exit Function
+    If InStr(1, s, vbCr) = 0 Then Exit Function
+    DeleteCRLF = Replace(Replace(Replace(s, vbCrLf, " "), vbLf, " "), vbCr, " ")
+    DeleteCRLF = DeleteCRLF(DeleteCRLF)
+End Function
