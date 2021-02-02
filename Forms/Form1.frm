@@ -57,7 +57,7 @@ Begin VB.Form Form1
    End
    Begin VB.Label Label1 
       AutoSize        =   -1  'True
-      Caption         =   $"Form1.frx":1782
+      Caption         =   $"Form1.frx":3AFA
       Height          =   390
       Left            =   3720
       TabIndex        =   3
