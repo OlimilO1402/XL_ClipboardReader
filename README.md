@@ -4,5 +4,5 @@ Maybe you know the situation. You have a pdf-document with some numbers and data
 Just copy the data to the clipboard, click the Read button, and now you can paste it to your excel sheet. 
 Whitespaces will be replaced by one Tab.  
 
-![XLClipboardReader Image](Resources/XLClipboardReader.png "XLClipboardReader Image")
+![XLClipboardReader Image](Resources/Pictures/XLClipboardReader.png "XLClipboardReader Image")
  
