@@ -4,13 +4,29 @@ Begin VB.Form Form1
    ClientHeight    =   7215
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   13935
+   ClientWidth     =   15615
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   481
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   929
+   ScaleWidth      =   1041
    StartUpPosition =   3  'Windows-Standard
+   Begin VB.CommandButton BtnReadNew 
+      Caption         =   "ReadNew"
+      Height          =   495
+      Left            =   2160
+      TabIndex        =   6
+      Top             =   75
+      Width           =   1095
+   End
+   Begin VB.CommandButton BtnClear 
+      Caption         =   "Clear"
+      Height          =   495
+      Left            =   1080
+      TabIndex        =   5
+      Top             =   75
+      Width           =   1095
+   End
    Begin VB.TextBox TxtData 
       BeginProperty Font 
          Name            =   "Consolas"
@@ -27,12 +43,12 @@ Begin VB.Form Form1
       ScrollBars      =   3  'Beides
       TabIndex        =   4
       Top             =   600
-      Width           =   13335
+      Width           =   14895
    End
    Begin VB.CheckBox cbNewlineOnly 
       Caption         =   "Only NewLine"
       Height          =   195
-      Left            =   1560
+      Left            =   3360
       TabIndex        =   2
       ToolTipText     =   "Every value gets a new line, so all data in one column"
       Top             =   360
@@ -41,7 +57,7 @@ Begin VB.Form Form1
    Begin VB.CheckBox cbNumOnly 
       Caption         =   "Only numbers no text"
       Height          =   195
-      Left            =   1560
+      Left            =   3360
       TabIndex        =   1
       ToolTipText     =   "Alle texts will be deleted, only numeric-data is allowed"
       Top             =   80
@@ -50,20 +66,20 @@ Begin VB.Form Form1
    Begin VB.CommandButton BtnRead 
       Caption         =   "Read"
       Height          =   495
-      Left            =   120
+      Left            =   0
       TabIndex        =   0
       Top             =   75
-      Width           =   1215
+      Width           =   1095
    End
    Begin VB.Label Label1 
       AutoSize        =   -1  'True
       Caption         =   $"Form1.frx":1CFA
       Height          =   390
-      Left            =   3720
+      Left            =   5280
       TabIndex        =   3
       Top             =   75
       UseMnemonic     =   0   'False
-      Width           =   10095
+      Width           =   10215
       WordWrap        =   -1  'True
    End
 End
@@ -195,6 +211,13 @@ Private Sub BtnRead_Click()
     Clipboard.Clear
     Clipboard.SetText t
 End Sub
+Private Sub BtnClear_Click()
+    TxtData.Text = vbNullString
+End Sub
+Private Sub BtnReadNew_Click()
+    BtnRead_Click
+End Sub
+
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     TxtData_KeyDown KeyCode, Shift
 End Sub
