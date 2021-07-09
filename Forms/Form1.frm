@@ -215,6 +215,7 @@ Private Sub BtnClear_Click()
     TxtData.Text = vbNullString
 End Sub
 Private Sub BtnReadNew_Click()
+    BtnClear_Click
     BtnRead_Click
 End Sub
 
