@@ -16,6 +16,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   2160
       TabIndex        =   6
+      TabStop         =   0   'False
       Top             =   75
       Width           =   1095
    End
@@ -24,6 +25,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   1080
       TabIndex        =   5
+      TabStop         =   0   'False
       Top             =   75
       Width           =   1095
    End
@@ -42,6 +44,7 @@ Begin VB.Form Form1
       MultiLine       =   -1  'True
       ScrollBars      =   3  'Beides
       TabIndex        =   4
+      TabStop         =   0   'False
       Top             =   600
       Width           =   14895
    End
@@ -50,6 +53,7 @@ Begin VB.Form Form1
       Height          =   195
       Left            =   3360
       TabIndex        =   2
+      TabStop         =   0   'False
       ToolTipText     =   "Every value gets a new line, so all data in one column"
       Top             =   360
       Width           =   1335
@@ -59,6 +63,7 @@ Begin VB.Form Form1
       Height          =   195
       Left            =   3360
       TabIndex        =   1
+      TabStop         =   0   'False
       ToolTipText     =   "Alle texts will be deleted, only numeric-data is allowed"
       Top             =   80
       Width           =   1935
@@ -68,6 +73,7 @@ Begin VB.Form Form1
       Height          =   495
       Left            =   0
       TabIndex        =   0
+      TabStop         =   0   'False
       Top             =   75
       Width           =   1095
    End
