@@ -2,9 +2,18 @@ VERSION 5.00
 Begin VB.Form Form1 
    Caption         =   "ClipboardReader"
    ClientHeight    =   7215
-   ClientLeft      =   120
-   ClientTop       =   465
+   ClientLeft      =   225
+   ClientTop       =   870
    ClientWidth     =   15615
+   BeginProperty Font 
+      Name            =   "Segoe UI"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
    Icon            =   "Form1.frx":0000
    LinkTopic       =   "Form1"
    ScaleHeight     =   481
@@ -17,7 +26,7 @@ Begin VB.Form Form1
       Left            =   2160
       TabIndex        =   6
       TabStop         =   0   'False
-      Top             =   75
+      Top             =   -45
       Width           =   1095
    End
    Begin VB.CommandButton BtnClear 
@@ -26,7 +35,7 @@ Begin VB.Form Form1
       Left            =   1080
       TabIndex        =   5
       TabStop         =   0   'False
-      Top             =   75
+      Top             =   -45
       Width           =   1095
    End
    Begin VB.TextBox TxtData 
@@ -55,8 +64,8 @@ Begin VB.Form Form1
       TabIndex        =   2
       TabStop         =   0   'False
       ToolTipText     =   "Every value gets a new line, so all data in one column"
-      Top             =   360
-      Width           =   1335
+      Top             =   240
+      Width           =   2175
    End
    Begin VB.CheckBox cbNumOnly 
       Caption         =   "Only numbers no text"
@@ -65,8 +74,8 @@ Begin VB.Form Form1
       TabIndex        =   1
       TabStop         =   0   'False
       ToolTipText     =   "Alle texts will be deleted, only numeric-data is allowed"
-      Top             =   80
-      Width           =   1935
+      Top             =   0
+      Width           =   2535
    End
    Begin VB.CommandButton BtnRead 
       Caption         =   "Read"
@@ -74,19 +83,25 @@ Begin VB.Form Form1
       Left            =   0
       TabIndex        =   0
       TabStop         =   0   'False
-      Top             =   75
+      Top             =   -45
       Width           =   1095
    End
    Begin VB.Label Label1 
       AutoSize        =   -1  'True
       Caption         =   $"Form1.frx":1CFA
-      Height          =   390
-      Left            =   5280
+      Height          =   585
+      Left            =   5880
       TabIndex        =   3
-      Top             =   75
+      Top             =   -45
       UseMnemonic     =   0   'False
-      Width           =   10215
+      Width           =   9615
       WordWrap        =   -1  'True
+   End
+   Begin VB.Menu mnuEdit 
+      Caption         =   "Edit"
+      Begin VB.Menu mnuEditReplace 
+         Caption         =   "Replace"
+      End
    End
 End
 Attribute VB_Name = "Form1"
@@ -100,6 +115,7 @@ Private Sub UserForm_Initialize()
     'Label1.Caption = "Maybe you know the situation, you have a pdf-document with some numeric values in tables and you need it in your excel-calculation. Just copy the data to the clipboard, click the Read button, and now you can paste it to your excel sheet. Whitespaces will be replaced by one Tab."
     Label1.Caption = "Sie kennen das sicher, Sie haben eine pdf-Datei mit irgendwelchen Daten in irgendwelchen Tabellen, und sie wollen diese Daten in Excel einlesen. Einfach die Daten in der Tabelle ihrer pdf-Datei markieren, in die Zwischenablage kopieren ([Strg]+[C]) und den Schalter [Read] klicken. Jetzt können Sie die Daten in Excel einfügen ([Strg]+[V])."
 End Sub
+
 Private Sub Form_Initialize()
     Label1.Caption = "Maybe you know the situation, you have a pdf-document with some numeric values in tables and you need it in your excel-calculation. Just copy the data to the clipboard, click the Read button, and now you can paste it to your excel sheet. Whitespaces will be replaced by one Tab."
     'Label1.Caption = "Sie kennen das sicher, Sie haben eine pdf-Datei mit irgendwelchen Daten in irgendwelchen Tabellen, und sie wollen diese Daten in Excel einlesen. Einfach die Daten in der Tabelle ihrer pdf-Datei markieren, in die Zwischenablage kopieren ([Strg]+[C]) und den Schalter [Read] klicken. Jetzt können Sie die Daten in Excel einfügen ([Strg]+[V])."
@@ -108,45 +124,45 @@ End Sub
 #If VB Then
 Private Sub Form_Resize()
     Dim brdr As Single: brdr = 8 '* Screen.TwipsPerPixelX
-    Dim L As Single: L = Label1.Left
-    Dim t As Single: t = Label1.Top
-    Dim W As Single: W = Me.ScaleWidth - L - brdr
+    Dim l As Single: l = Label1.Left
+    Dim T As Single: T = Label1.Top
+    Dim W As Single: W = Me.ScaleWidth - l - brdr
     Dim H As Single: H = Me.ScaleHeight
     Dim b As Boolean
     If W > 0 And H > 0 Then
-        Label1.Move L, t, W
+        Label1.Move l, T, W
         Label1.AutoSize = True
     Else
         b = True
     End If
-    L = 0
-    t = Max(IIf(b, 0, Label1.Top + Label1.Height), BtnRead.Top + BtnRead.Height)
+    l = 0
+    T = Max(IIf(b, 0, Label1.Top + Label1.Height), BtnRead.Top + BtnRead.Height)
     W = Me.ScaleWidth
-    H = H - t
+    H = H - T
     If W > 0 And H > 0 Then
-        TxtData.Move 0, t, W, H
+        TxtData.Move 0, T, W, H
     End If
 End Sub
 #Else
 Private Sub UserForm_Resize()
     Dim brdr As Single: brdr = 8 '* Screen.TwipsPerPixelX
-    Dim L As Single: L = Label1.Left
-    Dim t As Single: t = Label1.Top
-    Dim W As Single: W = Me.ScaleWidth - L - brdr
+    Dim l As Single: l = Label1.Left
+    Dim T As Single: T = Label1.Top
+    Dim W As Single: W = Me.ScaleWidth - l - brdr
     Dim H As Single: H = Me.ScaleHeight
     Dim b As Boolean
     If W > 0 And H > 0 Then
-        Label1.Move L, t, W
+        Label1.Move l, T, W
         Label1.AutoSize = True
     Else
         b = True
     End If
-    L = 0
-    t = Max(IIf(b, 0, Label1.Top + Label1.Height), BtnRead.Top + BtnRead.Height)
+    l = 0
+    T = Max(IIf(b, 0, Label1.Top + Label1.Height), BtnRead.Top + BtnRead.Height)
     W = Me.ScaleWidth
-    H = H - t
+    H = H - T
     If W > 0 And H > 0 Then
-        TxtData.Move 0, t, W, H
+        TxtData.Move 0, T, W, H
     End If
 End Sub
 #End If
@@ -172,11 +188,11 @@ Private Sub BtnRead_Click()
     If TxtData.Text = vbNullString Then
         TxtData.Text = Clipboard.GetText
     End If
-    Dim t As String: t = TxtData.Text
+    Dim T As String: T = TxtData.Text
     'zuerst alle tabs nochmal in spaces umwandeln, falls ein Text 2-mal eingelesen werden muss
-    t = Replace(t, vbTab, " ")
+    T = Replace(T, vbTab, " ")
     'so und wo zum Henker ist jetzt die recursive Delete Ws-Funktion abgeblieben?
-    Dim lines() As String: lines = Split(t, vbCrLf)
+    Dim lines() As String: lines = Split(T, vbCrLf)
     Dim i As Long
     Dim onlyNewLine As Boolean: onlyNewLine = Me.cbNewlineOnly.Value
     Dim svbCrLf As String: If onlyNewLine Then svbCrLf = vbCrLf
@@ -212,10 +228,10 @@ Private Sub BtnRead_Click()
         End If
         lines(i) = line
     Next
-    t = Join(lines, vbCrLf)
-    TxtData.Text = t
+    T = Join(lines, vbCrLf)
+    TxtData.Text = T
     Clipboard.Clear
-    Clipboard.SetText t
+    Clipboard.SetText T
 End Sub
 Private Sub BtnClear_Click()
     TxtData.Text = vbNullString
@@ -235,3 +251,15 @@ Private Sub TxtData_KeyDown(KeyCode As Integer, Shift As Integer)
         TxtData.SelLength = Len(TxtData.Text)
     End If
 End Sub
+
+' v ' ############################## ' v '         ' v ' ############################## ' v '
+Private Sub mnuEditReplace_Click()
+    'replace every " = " with vbTab
+    Dim s As String
+    s = Clipboard.GetText
+    If Len(s) = 0 Then Exit Sub
+    s = Replace(s, " = ", vbTab)
+    Clipboard.SetText s
+    
+End Sub
+
